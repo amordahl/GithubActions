@@ -8,6 +8,8 @@ jobs:
       - run: echo "Starting GitHub action!"
       - run: echo "Running in ${{ runner.os }}"
       - run: echo "In branch ${{ github.ref }}"
+      - name: Check out repo
+        uses: actions/checkout@v5
       - name: List files
         run: |
           ls ${{ github.workspace }}
