@@ -6,4 +6,7 @@ import munit.{FunSuite, ScalaCheckSuite}
 class MySuite extends FunSuite:
   test("Basic math"):
     assert(1 + 1 == 2)
+
+  test("Not so basic math"):
+    assert(1 * 1 == 2)
 end MySuite
