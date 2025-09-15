@@ -1,5 +1,5 @@
 package edu.uic
 
-@man
+@main
 def main(args: String*) =
   println("Hello, world!")

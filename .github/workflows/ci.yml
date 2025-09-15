@@ -19,6 +19,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+          cache: sbt
 
       - name: Setup scala
         uses: sbt/setup-sbt@v1
