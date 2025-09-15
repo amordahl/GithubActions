@@ -8,3 +8,6 @@ jobs:
       - run: echo "Starting GitHub action!"
       - run: echo "Running in ${{ runner.os }}"
       - run: echo "In branch ${{ github.ref }}"
+      - name: List files
+        run: |
+          ls ${{ github.workspace }}
