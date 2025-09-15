@@ -1,0 +1,8 @@
+name: Github Actions Demo
+run-name: GitHub actions by ${{ github.actor }}
+on: [push]
+jobs:
+  Explore-Github-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Starting GitHub action!"
