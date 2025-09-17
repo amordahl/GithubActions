@@ -34,7 +34,7 @@ jobs:
 
       - name: Test (1)
         if: ${{ matrix.os != 'macos-latest' }}
-        run: sbt "test -- --exclude-tag macos"
+        run: sbt 'test -- --exclude-tag macos'
 
       - name: Test (2) - only MacOS
         if: ${{ matrix.os == 'macos-latest' }}
