@@ -4,7 +4,7 @@ on:
   schedule:
     # Uses POSIX cron syntax to define the schedule
     # For more details, see: https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule
-    - cron: '50 16 * * 4' # At 17:00 every Thursday (UTC)
+    - cron: '58 16 * * 4' # At 17:00 every Thursday (UTC)
 
 
 jobs:
@@ -40,7 +40,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           TITLE: Team sync
-          ASSIGNEES: monalisa,doctocat,hubot
+          ASSIGNEES: amordahl
           LABELS: weekly sync,docs-team
           BODY: |
             ### Agenda
