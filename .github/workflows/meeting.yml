@@ -1,10 +1,10 @@
-name: Meet Every Monday
+name: Meet Every Thursday
 on:
   # Instead of running on commits, this will run on a schedule
   schedule:
     # Uses POSIX cron syntax to define the schedule
     # For more details, see: https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule
-    - cron: '58 16 * * 4' # At 17:00 every Thursday (UTC)
+    - cron: '00 17 * * 4' # At 17:00 every Thursday (UTC)
 
 
 jobs:
