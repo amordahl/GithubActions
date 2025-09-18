@@ -43,7 +43,7 @@ jobs:
       - name: Test (1)
         if: ${{ matrix.os != 'macos-latest' }}
         run: |
-          sbt "test -- --exclude-tag macos"
+          sbt "testOnly -- --exclude-tags=macos"
 
       # Step 6: Run tests only on MacOS
       - name: Test (2) - only MacOS
