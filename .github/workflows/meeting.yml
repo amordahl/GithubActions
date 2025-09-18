@@ -1,17 +1,23 @@
 name: Meet Every Monday
 on:
+  # Instead of running on commits, this will run on a schedule
   schedule:
-    - cron: '30 08 * * 1' # At 08:30 on Monday
+    # Uses POSIX cron syntax to define the schedule
+    # For more details, see: https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule
+    - cron: '50 16 * * 4' # At 17:00 every Thursday (UTC)
+
 
 jobs:
+  # Defines a job to create a GitHub issue
   create_issue:
     name: Create team sync issue
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
     permissions:
-      issues: write
+      issues: write # Grants permission to create and manage issues
     steps:
+      # Step 1: Create the issue using the Github CLI
       - name: Create team sync issue
-        run: |
+        run: | 
           if [[ $CLOSE_PREVIOUS == true ]]; then
             previous_issue_number=$(gh issue list \
               --label "$LABELS" \

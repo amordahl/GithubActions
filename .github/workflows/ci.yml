@@ -1,41 +1,51 @@
 name: Scala CI
 
+# on: when to run the workflow
 on:
   push:
-    branches: [main]
+    branches: [main] # whenever code is pushed to the main branch
   pull_request:
-    branches: [main]
+    branches: [main] # whenever a pull request is opened against the main branch
 
 jobs:
   build:
-    strategy:
+    strategy: # define a matrix of different OS and Java versions to test against
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        java: [11, 17, 21, 23]
-      fail-fast: false
-    runs-on: ${{ matrix.os }}
+        os: [ubuntu-latest, macos-latest, windows-latest] # different operating systems
+        java: [11, 17, 21, 23] # different Java versions
+      fail-fast: false # continue running all jobs even if one fails
+    
+    runs-on: ${{ matrix.os }} # run the job on the specified OS
 
+    # Now we define the steps to be executed in the job
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v5 # use the checkout action to clone the repo
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v5
+      # Step 2: Set up JDK
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v5 # use the setup-java action to install the specified JDK version
         with:
-          distribution: temurin
-          java-version: ${{ matrix.java }}
-          cache: sbt
+          distribution: temurin # use the Temurin distribution of OpenJDK
+          java-version: ${{ matrix.java }} # specify the Java version from the matrix
+          cache: sbt # enable caching for sbt dependencies
 
-      - name: Setup scala
+      # Step 3: Set up Scala and run sbt commands
+      - name: Setup scala 
         uses: sbt/setup-sbt@v1
 
+      # Step 4: Build and Test
       - name: Build
         run: sbt clean compile
 
+      # Step 5: Run tests with conditional logic based on OS
       - name: Test (1)
         if: ${{ matrix.os != 'macos-latest' }}
-        run: sbt 'test -- --exclude-tag macos'
+        run: |
+          sbt "test -- --exclude-tag macos"
 
+      # Step 6: Run tests only on MacOS
       - name: Test (2) - only MacOS
         if: ${{ matrix.os == 'macos-latest' }}
         run: sbt test

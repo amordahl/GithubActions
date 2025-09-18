@@ -1,16 +1,23 @@
+# Simple action to run some logging statements
 name: Github Actions Demo
 run-name: GitHub actions by ${{ github.actor }}
 on: [push]
 jobs:
-  Explore-Github-Actions:
-    runs-on: ubuntu-latest
+  Explore-Github-Actions: # This is the job ID
+    runs-on: ubuntu-latest # The type of runner that the job will run on
     steps:
       - run: echo "Starting GitHub action!"
-      - run: echo "Running in ${{ runner.os }}"
-      - run: echo "In branch ${{ github.ref }}"
+      - run: echo "Running in ${{ runner.os }}" # Log the OS of the runner
+      - run: echo "In branch ${{ github.ref }}" # Log the branch or tag ref that triggered the workflow
+      
+      # Step to check out the repository
       - name: Check out repo
         uses: actions/checkout@v5
+      
+      # Step to list files in the repository
       - name: List files
         run: |
           ls ${{ github.workspace }}
+      
+      # Step to display the last 5 commit messages
       - run: echo "Demo complete! Job status is ${{ job.status }}"
